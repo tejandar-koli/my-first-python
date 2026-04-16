@@ -1,10 +1,14 @@
 # Python Basics
 
-This repository contains my beginner Python programs.
+## About Me
+Hello, I am Tejandar Koli.  
+I am currently learning Python and working on improving my coding skills.
 
 ## Programs
 - hello.py
 - calculator.py
+- evenodd.py
+- table.py
 
 ## Goal
-To improve my Python programming and problem-solving skills.
+To become better at programming and problem solving.
