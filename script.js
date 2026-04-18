@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     const inputBox = document.getElementById("input");
     const chatBox = document.getElementById("chat");
 
     window.send = function () {
-        const text = inputBox.value.trim();
 
+        const text = inputBox.value.trim();
         if (text === "") return;
 
         addMessage("You", text, "user");
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function addMessage(sender, message, type) {
         const msg = document.createElement("p");
-        msg.className = type;
+        msg.className = "message " + type;
         msg.textContent = sender + ": " + message;
         chatBox.appendChild(msg);
     }
@@ -39,14 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
             return "I am running inside your browser 😊";
         }
 
-        if (text.includes("what can you do")) {
-            return "I can chat with you and will become smarter soon 🚀";
-        }
-
         if (text.includes("joke")) {
             return "Why did the computer get cold? Because it left its Windows open 😄";
         }
 
+        if (text.includes("what can you do")) {
+            return "I can chat with you and improve step by step 🚀";
+        }
+
         return "Hmm 🤔 I am still learning this...";
     }
+
 });
