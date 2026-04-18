@@ -1,30 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Task0.1 AI Chatbot</title>
-</head>
-<body>
-
-<h2>🤖 Task0.1 AI Chatbot</h2>
-
-<div id="chat"></div>
-
-<input id="input" placeholder="Type here..." />
-<button onclick="send()">Send</button>
-
 <script>
 function send() {
     let text = document.getElementById("input").value;
+    let chat = document.getElementById("chat");
 
-    document.getElementById("chat").innerHTML += "<p>You: " + text + "</p>";
+    chat.innerHTML += "<p>You: " + text + "</p>";
 
-    let reply = "I am your basic AI chatbot 🤖";
+    let reply = getAI(text);
 
-    document.getElementById("chat").innerHTML += "<p>Bot: " + reply + "</p>";
+    chat.innerHTML += "<p>Bot: " + reply + "</p>";
 
     document.getElementById("input").value = "";
 }
-</script>
 
-</body>
-</html>
+function getAI(text) {
+    text = text.toLowerCase();
+
+    // Simple “AI-like” understanding
+    if (text.includes("hello") || text.includes("hi")) {
+        return "Hello 👋 I am Task0.1 AI";
+    }
+
+    if (text.includes("name")) {
+        return "My name is Task0.1 AI Bot 🤖";
+    }
+
+    if (text.includes("how are you")) {
+        return "I am running inside your browser and learning!";
+    }
+
+    if (text.includes("what can you do")) {
+        return "I can chat with you and improve step by step 🚀";
+    }
+
+    if (text.includes("joke")) {
+        return "Why did the computer get cold? Because it left its WiWindowspen 😄";
+    }
+
+    return "Hmm 🤔 I am still learning this response...";
+}
+</script>
