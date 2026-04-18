@@ -3,46 +3,74 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputBox = document.getElementById("input");
     const chatBox = document.getElementById("chat");
 
-    window.send = async function () {
-
+    window.send = function () {
         const text = inputBox.value.trim();
+
         if (text === "") return;
 
         addMessage("You", text, "user");
 
-        // show loading message
-        addMessage("Bot", "Typing...", "bot");
+        showTyping();
 
-        const reply = await getAIResponse(text);
+        setTimeout(() => {
+            removeTyping();
 
-        // remove "Typing..."
-        chatBox.lastChild.remove();
+            const reply = getAIResponse(text);
 
-        addMessage("Bot", reply, "bot");
+            addMessage("AI", reply, "bot");
+
+        }, 600); // small delay for AI feel
 
         inputBox.value = "";
         chatBox.scrollTop = chatBox.scrollHeight;
     };
 
     function addMessage(sender, message, type) {
-        const msg = document.createElement("p");
+        const msg = document.createElement("div");
         msg.className = "message " + type;
         msg.textContent = sender + ": " + message;
         chatBox.appendChild(msg);
     }
 
-    async function getAIResponse(text) {
+    // AI typing effect
+    function showTyping() {
+        const typing = document.createElement("div");
+        typing.className = "message bot";
+        typing.id = "typing";
+        typing.textContent = "AI is typing...";
+        chatBox.appendChild(typing);
+    }
 
-        const res = await fetch("YOUR_BACKEND_URL/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ message: text })
-        });
+    function removeTyping() {
+        const typing = document.getElementById("typing");
+        if (typing) typing.remove();
+    }
 
-        const data = await res.json();
-        return data.reply;
+    // Simple AI brain (upgrade later to real API)
+    function getAIResponse(text) {
+        text = text.toLowerCase();
+
+        if (text.includes("hello") || text.includes("hi")) {
+            return "Hello 👋 I am your AI assistant";
+        }
+
+        if (text.includes("name")) {
+            return "My name is Task0.1 AI 🤖";
+        }
+
+        if (text.includes("how are you")) {
+            return "I am running perfectly inside your system ⚡";
+        }
+
+        if (text.includes("joke")) {
+            return "Why did the AI go to school? To get smarter 😄";
+        }
+
+        if (text.includes("what can you do")) {
+            return "I can chat with you and will become a real AI soon 🚀";
+        }
+
+        return "I am still learning... 🤔";
     }
 
 });
